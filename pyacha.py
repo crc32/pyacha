@@ -280,19 +280,19 @@ class Nacha_File(object):
     def __init__(self, **keywords):
         defaults = {
             # < Number of characters in Field> : < Description of Field >
-            'File_Open_Code': '1',             #
-            'File_Close_Code': '9',            #
-            'Record_Priority': '01',           #
-            'Immediate_Destination_ID': '',    #
-            'Immediate_Origin_ID': '',         #
-            'File_ID': '0',                    #
-            'File_Date': datetime.now(),       #
-            'Record_Size': '094',              #
-            'Blocking_Factor': '10',           #
-            'Format_Code': '1',                #
-            'Immediate_Destination_Name': '',  #
-            'Immediate_Origin_Name': '',       #
-            'Reference_Code': '00000000'       #
+            'File_Open_Code': '1',             # 1 : 1 = Open File Record
+            'File_Close_Code': '9',            # 1 : 9 = Close File Record
+            'Record_Priority': '01',           # 2 : Priority Code (often 01)
+            'Immediate_Destination_ID': '',    # 10: Initial Target Bank DFI
+            'Immediate_Origin_ID': '',         # 10: Company ID (often EIN)
+            'File_ID': '0',                    # 1 : File ID modifier (0-9 A-Z)
+            'File_Date': datetime.now(),       # 10: Creation Date '%y%m%d%H%M'
+            'Record_Size': '094',              # 3 : Characters in record (094)
+            'Blocking_Factor': '10',           # 2 : Block Size (10)
+            'Format_Code': '1',                # 1 : Format Code (1)
+            'Immediate_Destination_Name': '',  # 12: Name of receiving bank
+            'Immediate_Origin_Name': '',       # 12: Company Name
+            'Reference_Code': '00000000'       # 8 : File Reference Code
             }
         defaults.update(keywords)
         self.File_Open_Code             = defaults['File_Open_Code']
