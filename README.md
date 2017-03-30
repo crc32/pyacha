@@ -27,10 +27,12 @@ To build a compliant file, you need to provide a minimum of information.
         }
 
         batch_def = {
-            'Company_Name'           : file_def['Immediate_Origin_Name'].upper(),  # Uppercase of the Company name
+            'Company_Name'           : file_def['Immediate_Origin_Name'].upper(),  # Uppercase of the
+                                                                                   # Company name
             'Company_ID'             : file_def['Immediate_Origin_ID'],            # Company ID
             'Company_Entry_Desc'     : 'PAYROLL',                                  # Entry Description
-            'Company_DFI'            : file_def['Immediate_Destination_ID'][:8],   # Bank ID (without the check digit)
+            'Company_DFI'            : file_def['Immediate_Destination_ID'][:8],   # Bank ID (without the 
+                                                                                   # check digit)
             'CompanyDFI_Check_Digit' : file_def['Immediate_Destination_ID'][8:9],  # Bank ID Check Digit
             'Effective_Date'         : datetime.now() + timedelta(1),              # ACH Effective Date
             'Descriptive_Date'       : datetime.now()                              # File Creation Date
@@ -47,15 +49,18 @@ To build a compliant file, you need to provide a minimum of information.
                 'Target_DFI'           : record['TargetRouting'][:8],    # Target's routing number (DFI)
                 'Target_Check_Digit'   : record['TargetRouting'][8:9],   # Target's routing number (DFI Check)
                 'Target_Account_Number': record['TargetAccount'],        # Target's Account Number
-                'Transaction_Type'     : record['TxnType'],              # Transaction Type ('CR' or 'DR') for Credit or Debit
-                                                                         # Credit is GIVING money, Debit is TAKING money
+                'Transaction_Type'     : record['TxnType'],              # Transaction Type ('CR' or 'DR') for
+                                                                         # Credit or Debit
+                                                                         # Credit is GIVING money
+                                                                         # Debit is TAKING money
                 'Target_Name'          : record['TargetName'],           # Target's name on the account
-                'Target_ID'            : record['TargetID'],             # An Internal ID for the Target (employee ID, etc.)
+                'Target_ID'            : record['TargetID'],             # An Internal ID for the Target 
+                                                                         # (employee ID, etc.)
                 
-                                                                         # Initial assumption is that amounts are stored as
-                                                                         # Decimals or Floats.
-                                                                         # Must be converted to integer cents before
-                                                                         # addition to file
+                                                                         # Initial assumption is that amounts
+                                                                         # are stored as Decimals or Floats.
+                                                                         # Must be converted to integer 
+                                                                         # cents before addition to file
                 'Amount'               : int(((Decimal(record['Payment'])**2)**Decimal(0.5))*100)
                 
             })
